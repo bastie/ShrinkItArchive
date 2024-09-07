@@ -34,7 +34,7 @@ public class RleInputStream : java.io.InputStream {
 	 */
   public override func read() throws /*IOException*/ -> Int {
 		if (numBytes == -1) {
-      var b : Int = try bs.read();
+      let b : Int = try bs.read();
 			if (b == escapeChar) {
         repeatedByte = try bs.read();
         numBytes = try bs.read();

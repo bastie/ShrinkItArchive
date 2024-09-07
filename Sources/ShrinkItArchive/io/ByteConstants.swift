@@ -5,7 +5,7 @@
  * @see LittleEndianByteInputStream
  * @see LittleEndianByteOutputStream
  */
-public class ByteConstants {
+public struct ByteConstants {
 	/** Master Header Block identifier "magic" bytes. */
 	public static let NUFILE_ID : [UInt8] = [0x4e, 0xf5, 0x46, 0xe9, 0x6c, 0xe5]
 	/** Header Block identifier "magic" bytes. */
