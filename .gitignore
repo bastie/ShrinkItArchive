@@ -1,3 +1,11 @@
+# macOS
+.DS_Store
+
+# SPM
+Package.resolved
+.build
+.swiftpm
+
 # Eclipse
 .settings/
 .classpath

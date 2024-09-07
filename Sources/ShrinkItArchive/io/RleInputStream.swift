@@ -1,8 +1,4 @@
-package com.webcodepro.shrinkit.io;
-
-import java.io.IOException;
-import java.io.InputStream;
-
+import JavApi
 
 /**
  * The RleInputStream handles the NuFX RLE data stream.
@@ -13,40 +9,40 @@ import java.io.InputStream;
  * 
  * @author robgreene@users.sourceforge.net
  */
-public class RleInputStream extends InputStream {
-	private InputStream bs;
-	private int escapeChar;
-	private int repeatedByte;
-	private int numBytes = -1;
+public class RleInputStream : java.io.InputStream {
+  private var bs : java.io.InputStream
+  private var escapeChar : Int
+  private var repeatedByte : Int = 0
+  private var numBytes : Int = -1
 	
 	/**
 	 * Create an RLE input stream with the default marker byte.
 	 */
-	public RleInputStream(InputStream bs) {
-		this(bs, 0xdb);
+  public convenience init(_ bs : java.io.InputStream ) {
+    self.init(bs, 0xdb);
 	}
 	/**
 	 * Create an RLE input stream with the specified marker byte.
 	 */
-	public RleInputStream(InputStream bs, int escapeChar) {
-		this.bs = bs;
-		this.escapeChar = escapeChar;
+  public init(_ bs : java.io.InputStream, _ escapeChar : Int) {
+		self.bs = bs;
+		self.escapeChar = escapeChar;
 	}
 
 	/**
 	 * Read the next byte from the input stream.
 	 */
-	public int read() throws IOException {
+  public override func read() throws /*IOException*/ -> Int {
 		if (numBytes == -1) {
-			int b = bs.read();
+      var b : Int = try bs.read();
 			if (b == escapeChar) {
-				repeatedByte = bs.read();
-				numBytes = bs.read();
+        repeatedByte = try bs.read();
+        numBytes = try bs.read();
 			} else {
 				return b;
 			}
 		}
-		numBytes--;
+		numBytes -= 1
 		return repeatedByte;
 	}
 

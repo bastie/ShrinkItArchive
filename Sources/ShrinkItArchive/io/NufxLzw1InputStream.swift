@@ -1,9 +1,4 @@
-package com.webcodepro.shrinkit.io;
-
-import java.io.IOException;
-import java.io.InputStream;
-
-import com.webcodepro.shrinkit.CRC16;
+import JavApi
 
 /**
  * The <code>NufxLzw1InputStream</code> reads a data fork or
@@ -45,100 +40,100 @@ import com.webcodepro.shrinkit.CRC16;
  *  
  * @author robgreene@users.sourceforge.net
  */
-public class NufxLzw1InputStream extends InputStream {
+open class NufxLzw1InputStream : java.io.InputStream {
 	/** This is the raw data stream with all markers and compressed data. */
-	private LittleEndianByteInputStream dataStream;
+  private var dataStream : LittleEndianByteInputStream
 	/** Used for an LZW-only <code>InputStream</code>. */
-	private LzwInputStream lzwStream;
+  private var lzwStream : LzwInputStream?
 	/** Used for an RLE-only <code>InputStream</code>. */
-	private RleInputStream rleStream;
+  private var rleStream : RleInputStream?
 	/** Used for an LZW+RLE <code>InputStream</code>. */
-	private InputStream lzwRleStream;
+  private var lzwRleStream : java.io.InputStream?
 	/** This is the generic decompression stream from which we read. */
-	private InputStream decompressionStream;
+  private var decompressionStream : java.io.InputStream?
 	/** Counts the number of bytes in the 4096 byte chunk. */
-	private int bytesLeftInChunk;
+  private var bytesLeftInChunk : Int = 0
 	/** This is the CRC-16 for the uncompressed fork. */
-	private int givenCrc = -1;
+  private var givenCrc : Int = -1
 	/** This is the volume number for 5.25" disks. */
-	private int volumeNumber;
+  private var volumeNumber : Int = 0
 	/** This is the RLE character to use. */
-	private int rleCharacter;
+  private var rleCharacter : Int = 0
 	/** Used to track the CRC of data we've extracted */
-	private CRC16 dataCrc = new CRC16();
+	private var dataCrc = CRC16()
 	
 	/**
 	 * Create the LZW/1 input stream.
 	 */
-	public NufxLzw1InputStream(LittleEndianByteInputStream dataStream) {
-		this.dataStream = dataStream;
+  public init (_ dataStream : LittleEndianByteInputStream) {
+		self.dataStream = dataStream
 	}
 
 	/**
 	 * Read the next byte in the decompressed data stream.
 	 */
-	public int read() throws IOException {
+  open override func read() throws /*IOException*/ -> Int {
 		if (givenCrc == -1) {					// read the data or resource fork header
-			givenCrc = dataStream.readWord();
-			volumeNumber = dataStream.readByte();
-			rleCharacter = dataStream.readByte();
-			lzwStream = new LzwInputStream(new BitInputStream(dataStream, 9));
-			rleStream = new RleInputStream(dataStream, rleCharacter);
-			lzwRleStream = new RleInputStream(lzwStream);
+      givenCrc = try dataStream.readWord();
+      volumeNumber = try dataStream.readByte();
+      rleCharacter = try dataStream.readByte();
+			lzwStream = LzwInputStream(BitInputStream(dataStream, 9))
+			rleStream = RleInputStream(dataStream, rleCharacter)
+      lzwRleStream = RleInputStream(lzwStream!)
 		}
 		if (bytesLeftInChunk == 0) {		// read the chunk header
-			bytesLeftInChunk = 4096;		// NuFX always reads 4096 bytes
-			lzwStream.clearDictionary();	// Always clear dictionary
-			int length = dataStream.readWord();
-			int lzwFlag = dataStream.readByte();
-			int flag = lzwFlag + (length == 4096 ? 0 : 2);
+			bytesLeftInChunk = 4096		// NuFX always reads 4096 bytes
+      lzwStream!.clearDictionary()	// Always clear dictionary
+      let length : Int = try dataStream.readWord()
+      let lzwFlag : Int = try dataStream.readByte()
+      let flag : Int = lzwFlag + (length == 4096 ? 0 : 2);
 			switch (flag) {
 			case 0:		decompressionStream = dataStream;
 						break;
-			case 1:		decompressionStream = lzwStream;
+      case 1:		decompressionStream = lzwStream!;
 						break;
-			case 2:		decompressionStream = rleStream;
+      case 2:		decompressionStream = rleStream!;
 						break;
-			case 3:		decompressionStream = lzwRleStream;
+      case 3:		decompressionStream = lzwRleStream!;
 						break;
-			default:	throw new IOException("Unknown type of decompression, flag = " + flag);
+      default:	throw java.io.Throwable.IOException("Unknown type of decompression, flag = \(flag)")
 			}
 		}
 		// Now we can read a data byte
-		int b = decompressionStream.read();
-		bytesLeftInChunk--;
-		dataCrc.update(b);
-		return b;
+    let b : Int = try decompressionStream!.read()
+		bytesLeftInChunk -= 1
+		dataCrc.update(b)
+		return b
 	}
 	
 	/**
 	 * Indicates if the computed CRC matches the CRC given in the data stream.
 	 */
-	public boolean isCrcValid() {
+	public func isCrcValid() -> Bool {
 		return givenCrc == dataCrc.getValue();
 	}
 	
 	// GENERATED CODE
 
-	public int getGivenCrc() {
+	public func getGivenCrc() -> Int {
 		return givenCrc;
 	}
-	public void setGivenCrc(int givenCrc) {
-		this.givenCrc = givenCrc;
+  public func setGivenCrc(_ givenCrc : Int) {
+		self.givenCrc = givenCrc;
 	}
-	public int getVolumeNumber() {
+	public func getVolumeNumber() -> Int{
 		return volumeNumber;
 	}
-	public void setVolumeNumber(int volumeNumber) {
-		this.volumeNumber = volumeNumber;
+  public func setVolumeNumber(_ volumeNumber : Int) {
+		self.volumeNumber = volumeNumber;
 	}
-	public int getRleCharacter() {
+	public func getRleCharacter() -> Int {
 		return rleCharacter;
 	}
-	public void setRleCharacter(int rleCharacter) {
-		this.rleCharacter = rleCharacter;
+  public func setRleCharacter(_ rleCharacter: Int) {
+		self.rleCharacter = rleCharacter;
 	}
-	public long getDataCrc() {
+	public func getDataCrc() -> Int64{
 		return dataCrc.getValue();
 	}
 }

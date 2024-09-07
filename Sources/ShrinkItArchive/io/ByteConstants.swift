@@ -1,6 +1,3 @@
-package com.webcodepro.shrinkit.io;
-
-
 /**
  * Provides constants for the LittleEndianByteInputStream and ByteTarget classes.
  * 
@@ -8,29 +5,29 @@ package com.webcodepro.shrinkit.io;
  * @see LittleEndianByteInputStream
  * @see LittleEndianByteOutputStream
  */
-public interface ByteConstants {
+public class ByteConstants {
 	/** Master Header Block identifier "magic" bytes. */
-	public static final byte[] NUFILE_ID = { 0x4e, (byte)0xf5, 0x46, (byte)0xe9, 0x6c, (byte)0xe5 };
+	public static let NUFILE_ID : [UInt8] = [0x4e, 0xf5, 0x46, 0xe9, 0x6c, 0xe5]
 	/** Header Block identifier "magic" bytes. */
-	public static final byte[] NUFX_ID = { 0x4e, (byte)0xf5, 0x46, (byte)0xd8 };
+	public static let NUFX_ID : [UInt8] = [0x4e, 0xf5, 0x46, 0xd8]
 	/** Binary II identifier "magic" bytes. */
-	public static final byte[] BXY_ID = { 0x0a, 0x47, 0x4c };
+	public static let BXY_ID : [UInt8] = [0x0a, 0x47, 0x4c]
 	/** Apple IIgs Toolbox TimeRec seconds byte position. */
-	public static final int TIMEREC_SECOND = 0;
+	public static let TIMEREC_SECOND = 0;
 	/** Apple IIgs Toolbox TimeRec seconds byte position. */
-	public static final int TIMEREC_MINUTE = 1;
+	public static let TIMEREC_MINUTE = 1;
 	/** Apple IIgs Toolbox TimeRec minutes byte position. */
-	public static final int TIMEREC_HOUR = 2;
+	public static let TIMEREC_HOUR = 2;
 	/** Apple IIgs Toolbox TimeRec hours byte position. */
-	public static final int TIMEREC_YEAR = 3;
+	public static let TIMEREC_YEAR = 3;
 	/** Apple IIgs Toolbox TimeRec year byte position. */
-	public static final int TIMEREC_DAY = 4;
+	public static let TIMEREC_DAY = 4;
 	/** Apple IIgs Toolbox TimeRec day byte position. */
-	public static final int TIMEREC_MONTH = 5;
+	public static let TIMEREC_MONTH = 5;
 	/** Apple IIgs Toolbox TimeRec weekday (Mon, Tue, etc) byte position. */
-	public static final int TIMEREC_WEEKDAY = 7;
+	public static let TIMEREC_WEEKDAY = 7;
 	/** Apple IIgs Toolbox TimeRec length. */
-	public static final int TIMEREC_LENGTH = 8;
+	public static let TIMEREC_LENGTH = 8;
 	/** A null TimeRec */
-	public static final byte[] TIMEREC_NULL = new byte[TIMEREC_LENGTH];
+	public static let TIMEREC_NULL : [UInt8] = Array(repeating: 0, count: TIMEREC_LENGTH)
 }
