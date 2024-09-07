@@ -1,9 +1,7 @@
-//
-//  File.swift
-//  
-//
-//  Created by Sebastian Ritter on 05.09.24.
-//
+
+/*
+ * @author robgreene@users.sourceforge.net
+ */
 import JavApi
 import Foundation
 
