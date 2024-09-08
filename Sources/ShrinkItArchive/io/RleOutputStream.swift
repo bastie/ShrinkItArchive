@@ -1,7 +1,4 @@
-package com.webcodepro.shrinkit.io;
-
-import java.io.IOException;
-import java.io.OutputStream;
+import JavApi
 
 /**
  * The RleOutputStream handles the NuFX RLE data stream.
@@ -12,42 +9,42 @@ import java.io.OutputStream;
  * 
  * @author robgreene@users.sourceforge.net
  */
-public class RleOutputStream extends OutputStream {
-	private OutputStream os;
-	private int escapeChar;
-	private int repeatedByte;
-	private int numBytes = -1;
+public class RleOutputStream : java.io.OutputStream {
+  private var os : java.io.OutputStream
+  private var escapeChar : Int
+  private var repeatedByte : Int
+  private var numBytes : Int = -1;
 	
 	/**
 	 * Create an RLE output stream with the default marker byte.
 	 */
-	public RleOutputStream(OutputStream bs) {
-		this(bs, 0xdb);
+  public convenience init(_ bs : java.io.OutputStream) {
+    self.init (bs, Int(0xdb))
 	}
 	/**
 	 * Create an RLE output stream with the specified marker byte.
 	 */
-	public RleOutputStream(OutputStream os, int escapeChar) {
-		this.os = os;
-		this.escapeChar = escapeChar;
+  public init(_ os : java.io.OutputStream , _ escapeChar : Int) {
+		self.os = os
+		self.escapeChar = escapeChar
 	}
 	
 	/**
 	 * Write the next byte to the output stream.
 	 */
-	public void write(int b) throws IOException {
+  public override func write(_ b : Int) throws /*IOException*/ {
 		if (numBytes == -1) {
-			repeatedByte = b;
-			numBytes++;
+			repeatedByte = b
+			numBytes += 1
 		} else if (repeatedByte == b) {
-			numBytes++;
+			numBytes += 1
 			if (numBytes > 255) {
-				flush();
+        try flush()
 			}
 		} else {
-			flush();
-			repeatedByte = b;
-			numBytes++;
+      try flush()
+			repeatedByte = b
+			numBytes += 1
 		}
 	}
 	
@@ -58,14 +55,14 @@ public class RleOutputStream extends OutputStream {
 	 * write out the escape character, the repeated byte, and
 	 * the number of bytes. 
 	 */
-	public void flush() throws IOException {
+  public override func flush() throws /*IOException*/ {
 		if (numBytes != -1) {
 			if (numBytes == 0 && escapeChar != repeatedByte) {
-				os.write(repeatedByte);
+        try os.write(repeatedByte);
 			} else {
-				os.write(escapeChar);
-				os.write(repeatedByte);
-				os.write(numBytes);
+        try os.write(escapeChar);
+        try os.write(repeatedByte);
+        try os.write(numBytes);
 			}
 			numBytes = -1;
 		}
@@ -75,8 +72,8 @@ public class RleOutputStream extends OutputStream {
 	 * Close out the data stream.  Makes sure the repeat buffer
 	 * is flushed.
 	 */
-	public void close() throws IOException {
-		flush();
-		os.close();
+  public override func close() throws /*IOException*/ {
+    try flush()
+    try os.close()
 	}
 }
