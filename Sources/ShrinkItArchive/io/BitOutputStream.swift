@@ -15,9 +15,9 @@ public class BitOutputStream : java.io.OutputStream /*implements BitConstants*/ 
   /** Our data target. */
   private var os : java.io.OutputStream
   /** The number of bits to write for a request.  This can be adjusted dynamically. */
-  private var requestedNumberOfBits : Int
+  private var requestedNumberOfBits : Int = 0
   /** The current bit mask to use for a <code>write(int)</code> request. */
-  private var bitMask : Int
+  private var bitMask : Int = 0
   /** The buffer containing our bits.  */
   private var data = 0;
   /** Number of bits remaining in our buffer */
@@ -29,6 +29,7 @@ public class BitOutputStream : java.io.OutputStream /*implements BitConstants*/ 
    */
   public init(_ os : java.io.OutputStream, _ startingNumberOfBits : Int) {
     self.os = os;
+    super.init()
     setRequestedNumberOfBits(startingNumberOfBits);
   }
   

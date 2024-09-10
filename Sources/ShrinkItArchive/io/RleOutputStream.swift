@@ -12,7 +12,7 @@ import JavApi
 public class RleOutputStream : java.io.OutputStream {
   private var os : java.io.OutputStream
   private var escapeChar : Int
-  private var repeatedByte : Int
+  private var repeatedByte : Int = 0
   private var numBytes : Int = -1;
 	
 	/**
@@ -27,6 +27,7 @@ public class RleOutputStream : java.io.OutputStream {
   public init(_ os : java.io.OutputStream , _ escapeChar : Int) {
 		self.os = os
 		self.escapeChar = escapeChar
+    super.init()
 	}
 	
 	/**
