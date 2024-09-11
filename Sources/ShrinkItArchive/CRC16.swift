@@ -11,8 +11,7 @@ public class CRC16 : java.util.zip.Checksum {
 
 	/** CCITT polynomial: x^16 + x^12 + x^5 + 1 -> 0x1021 (1000000100001) */
   private static let poly : Int = 0x1021;
-  private static let table : [Int] = Array(repeating: 0, count: 256)
-  fileprivate let crcTable: [UInt16] = [ //table is copied from Java Code - other table is found on https://github.com/sparrowapps/crc16.swift/blob/master/crc16.swift
+  fileprivate static let table: [Int] = [ //table is copied from Java Code - other table is found on https://github.com/sparrowapps/crc16.swift/blob/master/crc16.swift
     0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7,
     0x8108, 0x9129, 0xA14A, 0xB16B, 0xC18C, 0xD1AD, 0xE1CE, 0xF1EF,
     0x1231, 0x0210, 0x3273, 0x2252, 0x52B5, 0x4294, 0x72F7, 0x62D6,
