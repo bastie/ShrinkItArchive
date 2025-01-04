@@ -46,7 +46,7 @@ public class NufxScan {
 		if (!directory.isDirectory()) {
       throw Throwable.IllegalArgumentException("'\(directory.toString())' is not a directory")
 		}
-    var files : [java.io.File] = directory.listFiles(NufxScan.NuFxFileFilter())!
+    let files : [java.io.File] = directory.listFiles(NufxScan.NuFxFileFilter())!
 		for file in files {
 			if (file.isDirectory()) {
 				try scanDirectory(file);

@@ -1,4 +1,4 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -18,7 +18,7 @@ let package = Package(
     dependencies: [
       .package(
         url: "https://github.com/bastie/JavApi4Swift.git",
-        .upToNextMajor(from: "0.15.0")
+        .upToNextMajor(from: "0.20.0")
       )
     ],
     targets: [

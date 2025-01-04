@@ -32,7 +32,7 @@ public class LzwOutputStream : java.io.OutputStream {
 		
     public init(_ d : Int) {
       self.data = [d]
-      var crc = CRC16()
+      let crc = CRC16()
       for b in data {
         crc.update(b)
       }
@@ -40,7 +40,7 @@ public class LzwOutputStream : java.io.OutputStream {
 		}
     public init(_ data : [Int]) {
 			self.data = data
-			var crc = CRC16()
+      let crc = CRC16()
       for b in data {
         crc.update(b)
       }
