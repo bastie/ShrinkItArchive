@@ -21,7 +21,7 @@ public enum ThreadClass {
 		case 0x0002: return DATA
 		case 0x0003: return FILENAME
 		default:
-      throw Throwable.IllegalArgumentException("Unknown thread_class of \(threadClass)")
+      throw IllegalArgumentException("Unknown thread_class of \(threadClass)")
 		}
 	}
 }

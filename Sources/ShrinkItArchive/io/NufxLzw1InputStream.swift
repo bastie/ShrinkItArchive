@@ -96,7 +96,7 @@ open class NufxLzw1InputStream : java.io.InputStream {
 						break;
       case 3:		decompressionStream = lzwRleStream!;
 						break;
-      default:	throw java.io.Throwable.IOException("Unknown type of decompression, flag = \(flag)")
+      default:	throw java.io.IOException("Unknown type of decompression, flag = \(flag)")
 			}
 		}
 		// Now we can read a data byte

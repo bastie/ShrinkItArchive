@@ -107,7 +107,7 @@ public class ThreadRecord {
     case ThreadFormat.DYNAMIC_LZW2:
 			return NufxLzw2InputStream(LittleEndianByteInputStream(getRawInputStream()))
 		default:
-      throw java.io.Throwable.IOException("The thread format \(threadFormat) does not have an InputStream associated with it!")
+      throw java.io.IOException("The thread format \(threadFormat) does not have an InputStream associated with it!")
 		}
 	}
 	

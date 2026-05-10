@@ -24,7 +24,7 @@ public class MasterHeaderBlock {
 	/**
 	 * Create the Master Header Block, based on the LittleEndianByteInputStream.
 	 */
-	public init (_ bs : LittleEndianByteInputStream) throws /*IOException*/ {
+  public init (_ bs : LittleEndianByteInputStream) throws {
 		var fileType = 0
     var headerOffset = 0
     fileType = try bs.seekFileType()
@@ -33,12 +33,12 @@ public class MasterHeaderBlock {
 			headerOffset = 128
       let count : Int = try bs.read()
 			if (count != 0) {
-				throw java.io.Throwable.IOException("This is actually a Binary II archive with multiple files in it."); // FIXME - NLS
+				throw java.io.IOException("This is actually a Binary II archive with multiple files in it."); // FIXME - NLS
 			}
       fileType = try bs.seekFileType()
 		}
 		if (!(fileType == NuFileArchive.NUFILE_ARCHIVE)) {
-			throw java.io.Throwable.IOException("Unable to decode this archive.") // FIXME - NLS
+			throw java.io.IOException("Unable to decode this archive.") // FIXME - NLS
 		}
     masterCrc = try bs.readWord()
 		bs.resetCrc()	// CRC is computed from this point to the end of the header

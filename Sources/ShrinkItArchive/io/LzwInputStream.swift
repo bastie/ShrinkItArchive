@@ -89,7 +89,7 @@ open class LzwInputStream : java.io.InputStream {
       System.arraycopy(w!, 0, &entry!, 0, w!.count)
       entry![w!.count] = w![0]
 		} else {
-      throw java.io.Throwable.IOException("Invalid code of <\(k)> encountered");
+      throw java.io.IOException("Invalid code of <\(k)> encountered");
 		}
     for i in entry! {
       _ = try! outputBuffer.add(i)

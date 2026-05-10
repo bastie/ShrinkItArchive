@@ -73,7 +73,7 @@ public enum ThreadFormat : CaseIterable {
         return f
       }
 		}
-		throw Throwable.IllegalArgumentException("Unknown thread_format of \(threadFormat)")
+		throw IllegalArgumentException("Unknown thread_format of \(threadFormat)")
 	}
 }
 

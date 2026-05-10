@@ -1,11 +1,11 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "ShrinkItArchive",
-    platforms: [.macOS(.v13),.visionOS(.v1),.iOS(.v16),.tvOS(.v16)],
+    platforms: [.macOS(.v26),.visionOS(.v1),.iOS(.v16),.tvOS(.v16)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -18,7 +18,7 @@ let package = Package(
     dependencies: [
       .package(
         url: "https://github.com/bastie/JavApi4Swift.git",
-        .upToNextMajor(from: "0.20.0")
+        .upToNextMajor(from: "0.31.0")
       )
     ],
     targets: [
@@ -36,9 +36,6 @@ let package = Package(
           .product(name: "JavApi", package: "JavApi4Swift"),
           .targetItem(name: "ShrinkItArchive", condition: nil)
         ],
-        swiftSettings: [
-          .enableExperimentalFeature("StrictConcurrency")
-        ]
       ),
       .testTarget(
           name: "ShrinkItArchiveTests",

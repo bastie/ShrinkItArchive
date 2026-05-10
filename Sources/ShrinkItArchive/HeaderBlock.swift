@@ -40,7 +40,7 @@ open class HeaderBlock {
   public init (_ bs : LittleEndianByteInputStream) throws /*IOException*/ {
     let type : Int = try bs.seekFileType(4);
 		if (type == 0) {
-      throw java.io.Throwable.IOException("Unable to decode this archive.");  // FIXME - NLS
+      throw java.io.IOException("Unable to decode this archive.");  // FIXME - NLS
 		}
     headerCrc = try bs.readWord();
     attribCount = try bs.readWord();

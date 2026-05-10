@@ -27,12 +27,12 @@ public enum ThreadKind {
       case 0x0002: return APPLE_IIGS_ICON
       default : break
       }
-      throw Throwable.IllegalArgumentException("Unknown thread_kind \(threadKind) for message thread_class of \(threadClass)")
+      throw IllegalArgumentException("Unknown thread_kind \(threadKind) for message thread_class of \(threadClass)")
     case ThreadClass.CONTROL:
       if (threadKind == 0x0000) {
         return CREATE_DIRECTORY
       }
-      throw Throwable.IllegalArgumentException("Unknown thread_kind \(threadKind) for control thread_class of \(threadClass)")
+      throw IllegalArgumentException("Unknown thread_kind \(threadKind) for control thread_class of \(threadClass)")
     case ThreadClass.DATA:
       switch (threadKind) {
       case 0x0000: return DATA_FORK
@@ -40,12 +40,12 @@ public enum ThreadKind {
       case 0x0002: return RESOURCE_FORK
       default: break
       }
-      throw Throwable.IllegalArgumentException("Unknown thread_kind \(threadKind) for data thread_class of \(threadClass)")
+      throw IllegalArgumentException("Unknown thread_kind \(threadKind) for data thread_class of \(threadClass)")
     case ThreadClass.FILENAME:
       if (threadKind == 0x0000) {
         return FILENAME
       }
-      throw Throwable.IllegalArgumentException("Unknown thread_kind \(threadKind) for filename thread_class of \(threadClass)")
+      throw IllegalArgumentException("Unknown thread_kind \(threadKind) for filename thread_class of \(threadClass)")
     }
   }
 }

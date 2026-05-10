@@ -43,7 +43,7 @@ public class LittleEndianByteInputStream : java.io.InputStream /*implements Byte
 	public func readByte() throws -> Int /*IOException*/ {
     let i : Int = try read()
     if (i == -1) {
-      throw java.io.Throwable.IOException("Expecting a byte but at EOF")
+      throw java.io.IOException("Expecting a byte but at EOF")
     }
 		return i
 	}
@@ -60,7 +60,7 @@ public class LittleEndianByteInputStream : java.io.InputStream /*implements Byte
 			read = 0;
 		}
 		if (read < bytes) {
-      throw java.io.Throwable.IOException("Requested \(bytes) bytes, but \(read) read")
+      throw java.io.IOException("Requested \(bytes) bytes, but \(read) read")
 		}
 		crc.update(data);
 		return data;

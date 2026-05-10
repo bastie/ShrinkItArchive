@@ -34,7 +34,7 @@ public class TimeRec {
 	 */
   public init(_ bytes : [UInt8], _ offset : Int) throws {
     if (bytes.length - offset < TimeRec.LENGTH) {
-      throw java.lang.Throwable.IllegalArgumentException("TimeRec requires a \(TimeRec.LENGTH) byte array.")
+      throw IllegalArgumentException("TimeRec requires a \(TimeRec.LENGTH) byte array.")
 		}
     data =  Array(bytes[offset..<offset+TimeRec.LENGTH])
 	}
